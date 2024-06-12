@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "channel-myanmar",
+  "api",
+]
+resolver = "2"
