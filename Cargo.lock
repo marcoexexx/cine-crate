@@ -73,6 +73,7 @@ dependencies = [
  "serde_json",
  "shuttle-axum",
  "shuttle-runtime",
+ "strum_macros 0.26.4",
  "tokio",
  "tower-cookies",
  "tower-http",

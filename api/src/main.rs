@@ -2,9 +2,10 @@ use axum::{response::IntoResponse, routing::get, Router};
 use reqwest::StatusCode;
 use tokio::net::TcpListener;
 
-use self::error::Result;
+pub use self::error::Result;
 
 mod error;
+mod web;
 
 async fn shutdown_signal() {
   tokio::signal::ctrl_c().await.unwrap();
