@@ -6,6 +6,10 @@ use self::error::Result;
 
 mod error;
 
+async fn shutdown_signal() {
+  tokio::signal::ctrl_c().await.unwrap();
+}
+
 async fn ping_handler() -> impl IntoResponse {
   (StatusCode::OK, "PONG")
 }
@@ -16,6 +20,7 @@ async fn main() -> Result<()> {
 
   let tcp_listener = TcpListener::bind("localhost:8000").await.unwrap();
   axum::serve(tcp_listener, routers.into_make_service())
+    .with_graceful_shutdown(shutdown_signal())
     .await
     .unwrap();
 
