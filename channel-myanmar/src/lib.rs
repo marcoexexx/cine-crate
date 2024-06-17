@@ -6,23 +6,8 @@ use utils::{get_document, NEW_RELEASE_QUERY};
 
 mod error;
 pub mod model;
+mod resolve_element;
 pub mod utils;
-
-macro_rules! resolve_element {
-  ($el:expr, $q:expr) => {{
-    let selector = Selector::parse("a")?;
-
-    $el.select(&selector).nth(0).unwrap().text().next().unwrap_or("")
-  }};
-
-  ($el:expr, $q:expr, attr <- ($($attr:expr),*)) => {{
-    let selector = Selector::parse("a")?;
-
-    let el = $el.select(&selector).nth(0).unwrap().value();
-
-    ($(el.attr(stringify!($attr)).unwrap_or(""),)*)
-  }};
-}
 
 pub async fn new_release() -> Result<Vec<Video>> {
   let mut new_releases = Vec::new();
